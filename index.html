@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة التهاني - Gatewat Al-Tahani</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -22,6 +23,7 @@
             --dark-text: #2c2c2c;
             --light-gray: #e8e8e8;
             --gold-transparent: rgba(212, 175, 55, 0.1);
+            --success: #25d366;
         }
 
         html, body {
@@ -38,7 +40,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -71,6 +73,50 @@
             opacity: 0.95;
         }
 
+        /* ============ MAIN TABS ============ */
+        .main-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border: 2px solid var(--gold);
+            background: var(--white);
+            color: var(--gold);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+
+        .tab-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ============ TAB CONTENT ============ */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         /* ============ CATEGORIES SECTION ============ */
         .categories-section {
             animation: fadeIn 0.8s ease-out;
@@ -87,14 +133,14 @@
 
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
             margin-bottom: 40px;
         }
 
         .category-card {
             background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             text-align: center;
             cursor: pointer;
@@ -132,21 +178,21 @@
         }
 
         .card-icon {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             display: block;
             animation: bounce 0.6s ease;
         }
 
         .category-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--gold);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 700;
         }
 
         .category-card p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--dark-text);
             opacity: 0.7;
             font-weight: 400;
@@ -178,8 +224,12 @@
         }
 
         .greeting-container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .greeting-title {
@@ -190,42 +240,189 @@
             font-weight: 700;
         }
 
+        /* ============ PERSON SELECTION MODAL ============ */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: 2px solid var(--gold);
+            background: var(--white);
+            color: var(--gold);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+
+        .modal-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
         /* ============ INPUT GROUP ============ */
         .input-group {
-            margin-bottom: 30px;
-            text-align: center;
+            margin-bottom: 20px;
+            text-align: right;
         }
 
         .input-group label {
             display: block;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--dark-text);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
-        .input-group input {
+        .input-group input, .input-group textarea {
             width: 100%;
-            padding: 15px 20px;
-            font-size: 1.1rem;
+            padding: 12px 15px;
+            font-size: 1rem;
             border: 2px solid var(--light-gray);
             border-radius: 10px;
             font-family: 'Cairo', sans-serif;
             transition: all 0.3s ease;
             background-color: var(--white);
             color: var(--dark-text);
-            text-align: center;
+            text-align: right;
         }
 
-        .input-group input:focus {
+        .input-group input:focus, .input-group textarea:focus {
             outline: none;
             border-color: var(--gold);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
             background-color: var(--sugar);
         }
 
-        .input-group input::placeholder {
-            color: #bbb;
+        .input-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .char-count {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        /* ============ IMAGE UPLOAD ============ */
+        .image-upload-area {
+            border: 3px dashed var(--gold);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--sugar);
+        }
+
+        .image-upload-area:hover {
+            background: var(--gold-transparent);
+            border-color: var(--dark-gold);
+        }
+
+        .image-upload-area.dragover {
+            border-color: var(--dark-gold);
+            background: var(--gold-transparent);
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        .image-preview {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .image-container {
+            position: relative;
+            text-align: center;
+        }
+
+        .image-preview img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-image:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+        }
+
+        .arrow-between {
+            font-size: 2rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
         }
 
         /* ============ GREETING CARD ============ */
@@ -236,7 +433,7 @@
             text-align: center;
             margin: 30px 0;
             box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
-            min-height: 350px;
+            min-height: 500px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -278,7 +475,7 @@
         }
 
         .card-message {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--gold);
             font-weight: 700;
             margin: 0;
@@ -293,21 +490,58 @@
             margin: 20px 0;
         }
 
-        .card-name {
-            font-size: 2.5rem;
+        .card-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .card-arrow {
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .card-from-to {
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-names {
+            font-size: 1.1rem;
             color: var(--dark-gold);
-            font-weight: 900;
             margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.1);
-            word-break: break-word;
-            animation: fadeIn 0.3s ease-out;
+        }
+
+        .card-message-text {
+            font-size: 1rem;
+            color: var(--dark-text);
+            line-height: 1.8;
+            margin: 15px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 100px;
         }
 
         .decorative-elements {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            font-size: 1.5rem;
+            gap: 15px;
+            font-size: 1.3rem;
+            margin: 10px 0;
         }
 
         .decoration {
@@ -335,17 +569,18 @@
 
         /* ============ ACTION BUTTONS ============ */
         .action-buttons {
-            display: flex;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
             margin: 30px 0;
-            flex-wrap: wrap;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
-            flex: 1;
-            min-width: 150px;
-            padding: 15px 25px;
-            font-size: 1rem;
+            padding: 12px 20px;
+            font-size: 0.95rem;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -355,6 +590,10 @@
             text-transform: none;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn::before {
@@ -392,21 +631,27 @@
             transform: none;
         }
 
-        .btn-share {
-            background: linear-gradient(135deg, #25d366 0%, #20ba5a 100%);
-            color: var(--white);
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+        .btn-social {
+            background: var(--white);
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.2);
         }
 
-        .btn-share:hover {
+        .btn-social:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
         }
 
-        .btn-share:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
+        .btn-print {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-print:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
         }
 
         .help-text {
@@ -416,6 +661,74 @@
             font-size: 0.9rem;
             margin-top: 15px;
             font-weight: 500;
+        }
+
+        /* ============ TEMPLATES SECTION ============ */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .template-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            min-height: 200px;
+        }
+
+        .template-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        .template-preview {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--gold-transparent) 0%, transparent 100%);
+        }
+
+        .template-icon {
+            font-size: 3rem;
+            z-index: 1;
+        }
+
+        .template-name {
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .template-desc {
+            font-size: 0.8rem;
+            color: var(--dark-text);
+            opacity: 0.6;
         }
 
         /* ============ FOOTER ============ */
@@ -486,6 +799,27 @@
             }
         }
 
+        /* ============ PRINT STYLES ============ */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                padding: 0;
+            }
+
+            .header, .back-btn, .input-group, .action-buttons, .help-text, .footer, .main-tabs {
+                display: none;
+            }
+
+            .greeting-card {
+                box-shadow: none;
+                margin: 0;
+                page-break-inside: avoid;
+            }
+        }
+
         /* ============ MOBILE RESPONSIVE ============ */
         @media (max-width: 768px) {
             .header {
@@ -496,150 +830,89 @@
                 font-size: 2rem;
             }
 
-            .tagline {
-                font-size: 1rem;
-            }
-
             .section-title {
                 font-size: 1.5rem;
             }
 
             .categories-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-            }
-
-            .category-card {
-                padding: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 12px;
             }
 
             .card-icon {
-                font-size: 2.5rem;
-            }
-
-            .category-card h3 {
-                font-size: 1.2rem;
+                font-size: 2.2rem;
             }
 
             .greeting-card {
                 padding: 25px 20px;
-                min-height: 300px;
-            }
-
-            .card-name {
-                font-size: 2rem;
+                min-height: 400px;
             }
 
             .card-message {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
             .action-buttons {
-                flex-direction: column;
+                gap: 10px;
             }
 
-            .btn {
-                min-width: 100%;
+            .templates-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
             }
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 15px;
+                padding: 12px;
             }
 
             .header {
-                padding: 25px 10px;
-                margin-bottom: 25px;
+                padding: 20px 10px;
+                margin-bottom: 20px;
             }
 
             .logo {
-                font-size: 1.8rem;
-            }
-
-            .tagline {
-                font-size: 0.9rem;
+                font-size: 1.5rem;
             }
 
             .section-title {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
                 margin-bottom: 20px;
             }
 
             .categories-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .category-card {
-                padding: 15px;
-            }
-
-            .card-icon {
-                font-size: 2.2rem;
-                margin-bottom: 10px;
-            }
-
-            .category-card h3 {
-                font-size: 1.1rem;
-                margin-bottom: 5px;
-            }
-
-            .category-card p {
-                font-size: 0.85rem;
+                gap: 10px;
             }
 
             .greeting-card {
                 padding: 20px 15px;
-                min-height: 250px;
-                border-width: 2px;
-            }
-
-            .card-name {
-                font-size: 1.8rem;
-                margin-bottom: 10px;
+                min-height: 350px;
             }
 
             .card-message {
-                font-size: 1rem;
-            }
-
-            .decorative-elements {
-                gap: 12px;
-                font-size: 1.2rem;
-            }
-
-            .gold-line {
-                margin: 10px 0;
-            }
-
-            .greeting-title {
-                font-size: 1.3rem;
-                margin-bottom: 15px;
-            }
-
-            .input-group input {
-                padding: 12px 15px;
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             .action-buttons {
-                gap: 10px;
-                margin: 20px 0;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
             }
 
             .btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
+                padding: 10px 12px;
+                font-size: 0.85rem;
             }
 
-            .help-text {
-                font-size: 0.8rem;
+            .templates-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
             }
 
-            .footer {
-                padding: 20px 10px;
-                margin-top: 30px;
+            .template-card {
+                padding: 12px;
+                min-height: 160px;
             }
         }
 
@@ -649,6 +922,18 @@
                 transition: none !important;
             }
         }
+
+        /* ============ HIDDEN INPUT ============ */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* ============ DIVIDER ============ */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px 0;
+        }
     </style>
 </head>
 <body>
@@ -657,246 +942,767 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="logo">🎊 بوابة التهاني</h1>
-                <p class="tagline">نشر الفرح والسعادة</p>
+                <p class="tagline">نشر الفرح والسعادة - إنشاء بطاقات تهنئة رائعة</p>
             </div>
         </header>
 
-        <!-- Categories Section -->
-        <section class="categories-section" id="categoriesSection">
-            <h2 class="section-title">اختر قسمك المفضل</h2>
-            <div class="categories-grid">
-                <!-- Eid -->
-                <div class="category-card" data-category="eid">
-                    <div class="card-icon">🌙</div>
-                    <h3>الأعياد</h3>
-                    <p>بطاقات تهنئة عيد الفطر والأضحى</p>
-                </div>
+        <!-- Main Tabs -->
+        <div class="main-tabs">
+            <button class="tab-btn active" onclick="switchTab('editor')">
+                <i class="fas fa-edit"></i> محرر البطاقات
+            </button>
+            <button class="tab-btn" onclick="switchTab('templates')">
+                <i class="fas fa-th"></i> البطاقات الفارغة
+            </button>
+        </div>
 
-                <!-- Wedding -->
-                <div class="category-card" data-category="wedding">
-                    <div class="card-icon">💒</div>
-                    <h3>الزواج</h3>
-                    <p>تهاني بمناسبة الزفاف السعيد</p>
-                </div>
-
-                <!-- Success -->
-                <div class="category-card" data-category="success">
-                    <div class="card-icon">🏆</div>
-                    <h3>النجاح</h3>
-                    <p>تهاني بالإنجاز والنجاح</p>
-                </div>
-
-                <!-- Birth -->
-                <div class="category-card" data-category="birth">
-                    <div class="card-icon">👶</div>
-                    <h3>المواليد</h3>
-                    <p>تهاني بقدوم المولود الجديد</p>
-                </div>
-
-                <!-- Birthday -->
-                <div class="category-card" data-category="birthday">
-                    <div class="card-icon">🎂</div>
-                    <h3>أعياد الميلاد</h3>
-                    <p>تهاني بسنة عمر جديدة</p>
-                </div>
-
-                <!-- Graduation -->
-                <div class="category-card" data-category="graduation">
-                    <div class="card-icon">🎓</div>
-                    <h3>التخرج</h3>
-                    <p>تهاني بإتمام المرحلة الدراسية</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Greeting Card Section -->
-        <section class="greeting-section" id="greetingSection" style="display: none;">
-            <button class="back-btn" id="backBtn">← العودة</button>
-
-            <div class="greeting-container">
-                <h2 class="greeting-title">إنشاء بطاقة التهنئة</h2>
-
-                <!-- Input Name -->
-                <div class="input-group">
-                    <label for="nameInput">أدخل الاسم:</label>
-                    <input 
-                        type="text" 
-                        id="nameInput" 
-                        placeholder="اكتب الاسم هنا..."
-                        maxlength="30"
-                        autocomplete="off"
-                    >
-                </div>
-
-                <!-- Greeting Card Preview -->
-                <div id="greetingCard" class="greeting-card">
-                    <div class="card-header">
-                        <div class="gold-line"></div>
-                        <p id="cardMessage" class="card-message">🌙 كل عام وأنت بألف خير</p>
-                        <div class="gold-line"></div>
+        <!-- ============ EDITOR TAB ============ -->
+        <div id="editor" class="tab-content active">
+            <!-- Categories Section -->
+            <section class="categories-section" id="categoriesSection">
+                <h2 class="section-title">اختر نوع البطاقة</h2>
+                <div class="categories-grid">
+                    <!-- Eid -->
+                    <div class="category-card" onclick="selectCategory('eid')">
+                        <div class="card-icon">🌙</div>
+                        <h3>الأعياد</h3>
+                        <p>بطاقات عيد الفطر والأضحى</p>
                     </div>
 
-                    <div class="card-body">
-                        <h2 id="cardName" class="card-name">اسمك</h2>
-                        <div class="decorative-elements">
-                            <span class="decoration">✨</span>
-                            <span class="decoration">💫</span>
-                            <span class="decoration">✨</span>
+                    <!-- Wedding -->
+                    <div class="category-card" onclick="selectCategory('wedding')">
+                        <div class="card-icon">💒</div>
+                        <h3>الزواج</h3>
+                        <p>تهاني بمناسبة الزفاف السعيد</p>
+                    </div>
+
+                    <!-- Success -->
+                    <div class="category-card" onclick="selectCategory('success')">
+                        <div class="card-icon">🏆</div>
+                        <h3>النجاح</h3>
+                        <p>تهاني بالإنجاز والتفوق</p>
+                    </div>
+
+                    <!-- Birth -->
+                    <div class="category-card" onclick="selectCategory('birth')">
+                        <div class="card-icon">👶</div>
+                        <h3>المواليد</h3>
+                        <p>تهاني بقدوم المولود الجديد</p>
+                    </div>
+
+                    <!-- Birthday -->
+                    <div class="category-card" onclick="selectCategory('birthday')">
+                        <div class="card-icon">🎂</div>
+                        <h3>أعياد الميلاد</h3>
+                        <p>تهاني بسنة عمر جديدة</p>
+                    </div>
+
+                    <!-- Graduation -->
+                    <div class="category-card" onclick="selectCategory('graduation')">
+                        <div class="card-icon">🎓</div>
+                        <h3>التخرج</h3>
+                        <p>تهاني بإتمام المرحلة الدراسية</p>
+                    </div>
+
+                    <!-- Achievement -->
+                    <div class="category-card" onclick="selectCategory('achievement')">
+                        <div class="card-icon">⭐</div>
+                        <h3>الإنجازات</h3>
+                        <p>تهاني بتحقيق الأحلام</p>
+                    </div>
+
+                    <!-- Appreciation -->
+                    <div class="category-card" onclick="selectCategory('appreciation')">
+                        <div class="card-icon">🙏</div>
+                        <h3>الشكر والتقدير</h3>
+                        <p>تهاني بالعرفان والامتنان</p>
+                    </div>
+
+                    <!-- Certificates -->
+                    <div class="category-card" onclick="selectCategory('certificate')">
+                        <div class="card-icon">📜</div>
+                        <h3>شهادات التقدير</h3>
+                        <p>شهادات تقدير وتميز</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Greeting Card Section -->
+            <section class="greeting-section" id="greetingSection" style="display: none;">
+                <button class="back-btn" onclick="goBack()">← العودة</button>
+
+                <div class="greeting-container">
+                    <h2 class="greeting-title">إنشاء بطاقة التهنئة</h2>
+
+                    <!-- Person Selection -->
+                    <div class="input-group">
+                        <label><i class="fas fa-users"></i> كم شخص سيشارك؟</label>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="modal-btn" onclick="selectPersonCount(1)" style="flex: 1;">
+                                <i class="fas fa-user"></i> شخص واحد
+                            </button>
+                            <button class="modal-btn" onclick="selectPersonCount(2)" style="flex: 1;">
+                                <i class="fas fa-user-friends"></i> شخصان
+                            </button>
                         </div>
                     </div>
 
-                    <div class="card-footer">
-                        <p class="footer-text">من بوابة التهاني</p>
-                        <div class="gold-line small"></div>
+                    <div class="divider"></div>
+
+                    <!-- Images Upload -->
+                    <div class="input-group">
+                        <label><i class="fas fa-images"></i> أضف الصور الشخصية (اختياري)</label>
+                        <div class="image-upload-area" id="imageUploadArea" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                            <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <div class="upload-text">اسحب الصور هنا أو انقر للاختيار</div>
+                        </div>
+                        <div class="image-preview" id="imagePreview"></div>
+                        <input type="file" id="imageInput1" accept="image/*" onchange="handleImageUpload(event, 1)">
+                        <input type="file" id="imageInput2" accept="image/*" onchange="handleImageUpload(event, 2)">
                     </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Sender and Recipient Names -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="input-group">
+                            <label for="senderName"><i class="fas fa-user"></i> اسمك (المرسل)</label>
+                            <input type="text" id="senderName" placeholder="أدخل اسمك" maxlength="30" oninput="updateCardPreview()">
+                        </div>
+                        <div class="input-group">
+                            <label for="recipientName"><i class="fas fa-heart"></i> اسم المتلقي</label>
+                            <input type="text" id="recipientName" placeholder="أدخل الاسم" maxlength="30" oninput="updateCardPreview()">
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Custom Message -->
+                    <div class="input-group">
+                        <label for="customMessage"><i class="fas fa-pen"></i> الرسالة الشخصية</label>
+                        <textarea id="customMessage" placeholder="اكتب رسالتك هنا..." maxlength="1500" oninput="updateCardPreview(); updateCharCount()"></textarea>
+                        <div class="char-count"><span id="charCount">0</span> / 1500 حرف</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Card Preview -->
+                    <div id="greetingCard" class="greeting-card">
+                        <div class="card-header">
+                            <div class="gold-line"></div>
+                            <p id="cardMessage" class="card-message">🌙 كل عام وأنت بألف خير</p>
+                            <div class="gold-line"></div>
+                        </div>
+
+                        <div class="card-body">
+                            <div id="cardImages" class="card-images"></div>
+                            <div class="card-from-to">من: <span id="cardSender">أنت</span> ← إلى: <span id="cardRecipient">المتلقي</span></div>
+                            <div id="cardMessageText" class="card-message-text">الرسالة الشخصية ستظهر هنا</div>
+                            <div class="decorative-elements">
+                                <span class="decoration">✨</span>
+                                <span class="decoration">💫</span>
+                                <span class="decoration">✨</span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <p class="footer-text">من بوابة التهاني</p>
+                            <div class="gold-line small"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-download" onclick="downloadCard()">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-social" onclick="shareOn('whatsapp')">
+                            <i class="fab fa-whatsapp"></i> واتساب
+                        </button>
+                        <button class="btn btn-social" onclick="shareOn('facebook')">
+                            <i class="fab fa-facebook"></i> فيسبوك
+                        </button>
+                        <button class="btn btn-social" onclick="shareOn('twitter')">
+                            <i class="fab fa-twitter"></i> تويتر
+                        </button>
+                        <button class="btn btn-social" onclick="shareOn('telegram')">
+                            <i class="fab fa-telegram"></i> تيليجرام
+                        </button>
+                        <button class="btn btn-social" onclick="shareOn('email')">
+                            <i class="fas fa-envelope"></i> بريد
+                        </button>
+                        <button class="btn btn-print" onclick="printCard()">
+                            <i class="fas fa-print"></i> طباعة
+                        </button>
+                        <button class="btn btn-social" onclick="shareOn('copy')">
+                            <i class="fas fa-copy"></i> نسخ
+                        </button>
+                    </div>
+
+                    <p class="help-text">💡 عدّل النصوص والصور لترى التغييرات مباشرة على البطاقة</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============ TEMPLATES TAB ============ -->
+        <div id="templates" class="tab-content">
+            <h2 class="section-title">🎨 44 بطاقة فارغة جاهزة للتخصيص</h2>
+            <div class="templates-grid">
+                <!-- 32 Certificates -->
+                <div class="template-card" onclick="createFromTemplate('certificate', 1)">
+                    <div class="template-preview">
+                        <div class="template-icon">📜</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 1</div>
+                    <div class="template-desc">تصميم 1</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 2)">
+                    <div class="template-preview">
+                        <div class="template-icon">🏅</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 2</div>
+                    <div class="template-desc">تصميم 2</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 3)">
+                    <div class="template-preview">
+                        <div class="template-icon">⭐</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 3</div>
+                    <div class="template-desc">تصميم 3</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 4)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌟</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 4</div>
+                    <div class="template-desc">تصميم 4</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 5)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎖️</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 5</div>
+                    <div class="template-desc">تصميم 5</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 6)">
+                    <div class="template-preview">
+                        <div class="template-icon">👑</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 6</div>
+                    <div class="template-desc">تصميم 6</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 7)">
+                    <div class="template-preview">
+                        <div class="template-icon">💎</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 7</div>
+                    <div class="template-desc">تصميم 7</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 8)">
+                    <div class="template-preview">
+                        <div class="template-icon">🏆</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 8</div>
+                    <div class="template-desc">تصميم 8</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 9)">
+                    <div class="template-preview">
+                        <div class="template-icon">✨</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 9</div>
+                    <div class="template-desc">تصميم 9</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 10)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎯</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 10</div>
+                    <div class="template-desc">تصميم 10</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 11)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌺</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 11</div>
+                    <div class="template-desc">تصميم 11</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 12)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌸</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 12</div>
+                    <div class="template-desc">تصميم 12</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 13)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌻</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 13</div>
+                    <div class="template-desc">تصميم 13</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 14)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌹</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 14</div>
+                    <div class="template-desc">تصميم 14</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 15)">
+                    <div class="template-preview">
+                        <div class="template-icon">🦋</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 15</div>
+                    <div class="template-desc">تصميم 15</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 16)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎀</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 16</div>
+                    <div class="template-desc">تصميم 16</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 17)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎊</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 17</div>
+                    <div class="template-desc">تصميم 17</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 18)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎉</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 18</div>
+                    <div class="template-desc">تصميم 18</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 19)">
+                    <div class="template-preview">
+                        <div class="template-icon">💝</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 19</div>
+                    <div class="template-desc">تصميم 19</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 20)">
+                    <div class="template-preview">
+                        <div class="template-icon">💐</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 20</div>
+                    <div class="template-desc">تصميم 20</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 21)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎁</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 21</div>
+                    <div class="template-desc">تصميم 21</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 22)">
+                    <div class="template-preview">
+                        <div class="template-icon">👏</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 22</div>
+                    <div class="template-desc">تصميم 22</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 23)">
+                    <div class="template-preview">
+                        <div class="template-icon">🙌</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 23</div>
+                    <div class="template-desc">تصميم 23</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 24)">
+                    <div class="template-preview">
+                        <div class="template-icon">🤝</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 24</div>
+                    <div class="template-desc">تصميم 24</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 25)">
+                    <div class="template-preview">
+                        <div class="template-icon">💪</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 25</div>
+                    <div class="template-desc">تصميم 25</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 26)">
+                    <div class="template-preview">
+                        <div class="template-icon">🔥</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 26</div>
+                    <div class="template-desc">تصميم 26</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 27)">
+                    <div class="template-preview">
+                        <div class="template-icon">⚡</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 27</div>
+                    <div class="template-desc">تصميم 27</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 28)">
+                    <div class="template-preview">
+                        <div class="template-icon">💥</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 28</div>
+                    <div class="template-desc">تصميم 28</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 29)">
+                    <div class="template-preview">
+                        <div class="template-icon">🚀</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 29</div>
+                    <div class="template-desc">تصميم 29</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 30)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌟</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 30</div>
+                    <div class="template-desc">تصميم 30</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 31)">
+                    <div class="template-preview">
+                        <div class="template-icon">💫</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 31</div>
+                    <div class="template-desc">تصميم 31</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('certificate', 32)">
+                    <div class="template-preview">
+                        <div class="template-icon">✨</div>
+                    </div>
+                    <div class="template-name">شهادة تقدير 32</div>
+                    <div class="template-desc">تصميم 32</div>
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="action-buttons">
-                    <button class="btn btn-download" id="downloadBtn">
-                        📥 تحميل البطاقة
-                    </button>
-                    <button class="btn btn-share" id="shareBtn">
-                        📱 مشاركة على واتساب
-                    </button>
+                <!-- 12 Eid Templates (33-44) -->
+                <div class="template-card" onclick="createFromTemplate('eid', 33)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌙</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 33</div>
+                    <div class="template-desc">عيد فطر</div>
                 </div>
-
-                <p class="help-text">💡 ��كتب الاسم لتراه مباشرة على البطاقة</p>
+                <div class="template-card" onclick="createFromTemplate('eid', 34)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎆</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 34</div>
+                    <div class="template-desc">عيد أضحى</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 35)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌠</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 35</div>
+                    <div class="template-desc">ليلة القدر</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 36)">
+                    <div class="template-preview">
+                        <div class="template-icon">🕌</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 36</div>
+                    <div class="template-desc">رمضان</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 37)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌙⭐</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 37</div>
+                    <div class="template-desc">تصميم خاص</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 38)">
+                    <div class="template-preview">
+                        <div class="template-icon">✨🌙</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 38</div>
+                    <div class="template-desc">تصميم فخم</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 39)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌟🕌</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 39</div>
+                    <div class="template-desc">تصميم مميز</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 40)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎊🌙</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 40</div>
+                    <div class="template-desc">احتفالي</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 41)">
+                    <div class="template-preview">
+                        <div class="template-icon">🎉✨</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 41</div>
+                    <div class="template-desc">بألف خير</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 42)">
+                    <div class="template-preview">
+                        <div class="template-icon">💚🌙</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 42</div>
+                    <div class="template-desc">بكل الحب</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 43)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌸🌙</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 43</div>
+                    <div class="template-desc">بكل الرقة</div>
+                </div>
+                <div class="template-card" onclick="createFromTemplate('eid', 44)">
+                    <div class="template-preview">
+                        <div class="template-icon">🌺✨</div>
+                    </div>
+                    <div class="template-name">بطاقة أعياد 44</div>
+                    <div class="template-desc">تصميم مقترح</div>
+                </div>
             </div>
-        </section>
+        </div>
 
         <!-- Footer -->
         <footer class="footer">
             <p>© 2026 بوابة التهاني | جميع الحقوق محفوظة</p>
-            <p class="version">Made with ❤️</p>
+            <p class="version">Made with ❤️ by Gatewat Al-Tahani Team</p>
         </footer>
     </div>
 
-    <!-- HTML2Canvas Library for Image Download -->
+    <!-- HTML2Canvas Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
+
     <script>
-        // Category Messages & Configuration
+        // ============ CATEGORY MESSAGES ============
         const categoryMessages = {
             eid: {
-                message: 'كل عام وأنت بألف خير',
-                icon: '🌙'
+                message: '🌙 كل عام وأنت بألف خير',
+                defaultText: 'كل عام وأنت أقرب من أحلامك\nبألف صحة وسعادة\nعسى يعود عليك بالخير\nوتقضي أجمل أيامك مع أحبابك\nفي فرح وسرور دائم\nعام جديد يحمل لك كل الخير\nألف مبروك العيد\nكل عام وأنت بألف خير\nعام سعيد عليك وعلى أحبابك\nدمت دائماً بكل خير'
             },
             wedding: {
-                message: 'ألف مبروك العقد السعيد',
-                icon: '💒'
+                message: '💒 ألف مبروك العقد السعيد',
+                defaultText: 'ألف مبروك الزفاف السعيد\nحفظ الله حبكما وأديم المحبة والمودة بينكما\nعقبال العمر يا رب\nأتمنى لكما حياة زوجية سعيدة\nملؤها الحب والاحترام\nألف مبروك يا أجمل عروسين\nعسى يكون بداية حياة جميلة\nحفظكما الله لبعضكما\nألف مبروك العقد والزفاف\nحياة زوجية موفقة بإذن الله'
             },
             success: {
-                message: 'مبروك تحقيق حلمك',
-                icon: '🏆'
+                message: '🏆 مبروك تحقيق حلمك',
+                defaultText: 'مبروك النجاح والتفوق\nأنت كنت تستحق هذا بكل جدارة\nكل تعبك وجهودك أتت بثمارها\nألف مبروك يا بطل\nنجاحك يسعدنا جميعاً\nاستحققت هذا بكل جدارة واستحقاق\nفخور بإنجازاتك وتفوقك\nعقبال ما يكون النجاح عادتك\nألف مبروك بتحقيق حلمك\nنجاح متتابع إن شاء الله'
             },
             birth: {
-                message: 'مبروك المولود الجديد',
-                icon: '👶'
+                message: '👶 مبروك المولود الجديد',
+                defaultText: 'الحمد لله على السلامة\nمبروك قدوم النور إلى بيتكم\nجزاكم الله خيراً على هذه النعمة\nأتمنى أن تكون ذرية صالحة\nحفظ الله الصغير لكم\nبشرى سارة بقدوم الملاك\nمبروك يا أم الصغير\nألف مبروك بالمولود الجديد\nحياة سعيدة مع صغيركم الغالي\nالحمد لله على كل حال'
             },
             birthday: {
-                message: 'كل عام وأنت أقرب لأحلامك',
-                icon: '🎂'
+                message: '🎂 كل عام وأنت أقرب لأحلامك',
+                defaultText: 'كل عام وأنت بكل خير\nعام جديد من عمرك يحمل لك الفرح والسعادة\nأتمنى أن يكون هذا العام مليء بالإنجازات\nكل عام وأحلامك تتحقق\nكل عام وأنت بصحة وعافية\nعام مميز بذكرى ميلادك الغالي\nكل عام وأنت أقرب لأحلامك\nألف مبروك سنة عمر جديدة\nحياة جديدة بكل الخير والسعادة\nدمت دائماً بكل خير يا غالي'
             },
             graduation: {
-                message: 'مبروك نهاية المرحلة بتفوق',
-                icon: '🎓'
+                message: '🎓 مبروك نهاية المرحلة بتفوق',
+                defaultText: 'مبروك التخرج والنجاح\nكل تعبك أتى بثماره\nاستحققت هذه الشهادة بجدارة\nأتمنى لك مستقبل مليء بالإنجازات\nحظاً موفقاً في حياتك العملية\nألف مبروك يا خريج\nفخور بتحصيلك العلمي\nعقبال التميز في مستقبلك\nشهادة جديدة في طريقك للنجاح\nكل عام وأنت في تقدم وازدهار'
+            },
+            achievement: {
+                message: '⭐ مبروك الإنجاز والنجاح',
+                defaultText: 'مبروك تحقيق الإنجاز الجديد\nأنت الأفضل بكل شيء تفعله\nاستحققت هذا النجاح بكل جدارة\nفخور بإنجازاتك المستمرة\nعقبال النجاحات المتتالية\nكل مرة تثبت أنك الأفضل\nمبروك يا صاحب الإرادة القوية\nالنجاح يتبعك في كل خطواتك\nألف مبروك بالإنجاز الجديد\nدمت دائماً متفوقاً ومتميزاً'
+            },
+            appreciation: {
+                message: '🙏 شكراً على عطاؤك المستمر',
+                defaultText: 'شكراً لك على كل عطاؤك\nجزاك الله خيراً على كل ما فعلته\nأنت تستحق كل التقدير والاحترام\nشكراً على وقتك وجهودك\nعملك لا يُنسى أبداً\nشكراً من أعماق القلب\nأنت الأفضل في كل شيء تفعله\nجزاك الله ألف خير\nشكراً على الإنسانية والطيبة\nدمت بكل الخير والسعادة'
+            },
+            certificate: {
+                message: '📜 شهادة تقدير وتميز',
+                defaultText: 'شهادة تقدير لتميزك واجتهادك\nأنت تستحق كل الثناء والتقدير\nجهودك لم تمر دون ملاحظة\nأنت مثال للاجتهاد والتفاني\nشكراً على مساهماتك القيمة\nتقديراً لتفانيك في العمل\nأنت تستحق كل احترام وتقدير\nجزاك الله خيراً على جهودك\nشهادة تقدير لشخص مميز\nدمت دائماً متميزاً ومجتهداً'
             }
         };
 
         let selectedCategory = null;
+        let personCount = 1;
+        const images = { 1: null, 2: null };
 
-        // DOM Elements
-        const categoryCards = document.querySelectorAll('.category-card');
-        const greetingSection = document.getElementById('greetingSection');
-        const categoriesSection = document.getElementById('categoriesSection');
-        const backBtn = document.getElementById('backBtn');
-        const nameInput = document.getElementById('nameInput');
-        const cardMessage = document.getElementById('cardMessage');
-        const cardName = document.getElementById('cardName');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const shareBtn = document.getElementById('shareBtn');
-        const greetingCard = document.getElementById('greetingCard');
+        // ============ TAB SWITCHING ============
+        function switchTab(tab) {
+            // Hide all tabs
+            document.getElementById('editor').classList.remove('active');
+            document.getElementById('templates').classList.remove('active');
 
-        // ============ EVENT LISTENERS ============
+            // Remove active class from buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
-        // Category Selection
-        categoryCards.forEach(card => {
-            card.addEventListener('click', function() {
-                selectedCategory = this.getAttribute('data-category');
-                showGreetingCard();
-            });
+            // Show selected tab
+            document.getElementById(tab).classList.add('active');
 
-            card.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    selectedCategory = this.getAttribute('data-category');
-                    showGreetingCard();
-                }
-            });
-        });
+            // Add active class to clicked button
+            event.target.closest('.tab-btn').classList.add('active');
+        }
 
-        // Back Button
-        backBtn.addEventListener('click', goBackToCategories);
-
-        // Real-time Name Update
-        nameInput.addEventListener('input', updateCardName);
-        nameInput.addEventListener('keypress', handleNameInputKeyPress);
-
-        // Download Button
-        downloadBtn.addEventListener('click', downloadCard);
-
-        // Share Button
-        shareBtn.addEventListener('click', shareOnWhatsApp);
-
-        // ============ FUNCTIONS ============
-
-        function showGreetingCard() {
-            categoriesSection.style.display = 'none';
-            greetingSection.style.display = 'block';
+        // ============ CATEGORY SELECTION ============
+        function selectCategory(category) {
+            selectedCategory = category;
+            document.getElementById('categoriesSection').style.display = 'none';
+            document.getElementById('greetingSection').style.display = 'block';
             
-            const categoryData = categoryMessages[selectedCategory];
-            cardMessage.textContent = categoryData.icon + ' ' + categoryData.message;
-            cardName.textContent = 'اسمك';
-            nameInput.value = '';
-            nameInput.focus();
+            const categoryData = categoryMessages[category];
+            document.getElementById('cardMessage').textContent = categoryData.message;
+            document.getElementById('customMessage').value = categoryData.defaultText;
             
-            // Smooth scroll to top
+            updateCardPreview();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function goBackToCategories() {
-            greetingSection.style.display = 'none';
-            categoriesSection.style.display = 'block';
+        // ============ PERSON COUNT SELECTION ============
+        function selectPersonCount(count) {
+            personCount = count;
+            updateCardPreview();
+        }
+
+        // ============ IMAGE HANDLING ============
+        function handleDragOver(event) {
+            event.preventDefault();
+            document.getElementById('imageUploadArea').classList.add('dragover');
+        }
+
+        function handleDragLeave(event) {
+            event.preventDefault();
+            document.getElementById('imageUploadArea').classList.remove('dragover');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            document.getElementById('imageUploadArea').classList.remove('dragover');
+            
+            const files = event.dataTransfer.files;
+            for (let i = 0; i < Math.min(files.length, personCount); i++) {
+                if (files[i].type.startsWith('image/')) {
+                    handleImageFile(files[i], i + 1);
+                }
+            }
+        }
+
+        function handleImageUpload(event, personIndex) {
+            const file = event.target.files[0];
+            if (file) {
+                handleImageFile(file, personIndex);
+            }
+        }
+
+        function handleImageFile(file, personIndex) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                images[personIndex] = e.target.result;
+                updateImagePreview();
+                updateCardPreview();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateImagePreview() {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+
+            for (let i = 1; i <= personCount; i++) {
+                if (images[i]) {
+                    const container = document.createElement('div');
+                    container.className = 'image-container';
+                    
+                    const img = document.createElement('img');
+                    img.src = images[i];
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'remove-image';
+                    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    removeBtn.onclick = () => {
+                        images[i] = null;
+                        document.getElementById(`imageInput${i}`).value = '';
+                        updateImagePreview();
+                        updateCardPreview();
+                    };
+                    
+                    container.appendChild(img);
+                    container.appendChild(removeBtn);
+                    preview.appendChild(container);
+                } else {
+                    const container = document.createElement('div');
+                    container.className = 'image-container';
+                    
+                    const uploadBtn = document.createElement('button');
+                    uploadBtn.className = 'modal-btn';
+                    uploadBtn.style.width = '120px';
+                    uploadBtn.innerHTML = `<i class="fas fa-plus"></i> صورة ${i}`;
+                    uploadBtn.onclick = () => document.getElementById(`imageInput${i}`).click();
+                    
+                    container.appendChild(uploadBtn);
+                    preview.appendChild(container);
+                }
+            }
+        }
+
+        // ============ CARD PREVIEW UPDATE ============
+        function updateCardPreview() {
+            const sender = document.getElementById('senderName').value || 'أنت';
+            const recipient = document.getElementById('recipientName').value || 'المتلقي';
+            const message = document.getElementById('customMessage').value || 'الرسالة الشخصية';
+
+            document.getElementById('cardSender').textContent = sender;
+            document.getElementById('cardRecipient').textContent = recipient;
+            document.getElementById('cardMessageText').textContent = message;
+
+            // Update images
+            const cardImages = document.getElementById('cardImages');
+            cardImages.innerHTML = '';
+
+            if (personCount === 1) {
+                if (images[1]) {
+                    const img = document.createElement('img');
+                    img.src = images[1];
+                    img.className = 'card-image';
+                    cardImages.appendChild(img);
+                }
+            } else if (personCount === 2) {
+                if (images[1]) {
+                    const img1 = document.createElement('img');
+                    img1.src = images[1];
+                    img1.className = 'card-image';
+                    cardImages.appendChild(img1);
+                }
+
+                const arrow = document.createElement('div');
+                arrow.className = 'card-arrow';
+                arrow.innerHTML = '←';
+                cardImages.appendChild(arrow);
+
+                if (images[2]) {
+                    const img2 = document.createElement('img');
+                    img2.src = images[2];
+                    img2.className = 'card-image';
+                    cardImages.appendChild(img2);
+                }
+            }
+        }
+
+        function updateCharCount() {
+            const count = document.getElementById('customMessage').value.length;
+            document.getElementById('charCount').textContent = count;
+        }
+
+        // ============ GO BACK ============
+        function goBack() {
+            document.getElementById('greetingSection').style.display = 'none';
+            document.getElementById('categoriesSection').style.display = 'block';
             selectedCategory = null;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function updateCardName() {
-            const name = nameInput.value.trim();
-            cardName.textContent = name || 'اسمك';
-        }
-
-        function handleNameInputKeyPress(e) {
-            if (e.key === 'Enter') {
-                if (nameInput.value.trim()) {
-                    downloadBtn.click();
-                }
-            }
-        }
-
+        // ============ DOWNLOAD CARD ============
         async function downloadCard() {
-            if (!nameInput.value.trim()) {
-                showAlert('من فضلك أدخل الاسم أولاً');
-                nameInput.focus();
+            if (!document.getElementById('recipientName').value.trim()) {
+                alert('من فضلك أدخل اسم المتلقي');
                 return;
             }
 
-            downloadBtn.disabled = true;
-            const originalText = downloadBtn.textContent;
-            downloadBtn.textContent = '⏳ جاري التحميل...';
+            const btn = event.target.closest('.btn-download');
+            btn.disabled = true;
+            btn.textContent = '⏳ جاري التحميل...';
 
             try {
-                const canvas = await html2canvas(greetingCard, {
+                const canvas = await html2canvas(document.getElementById('greetingCard'), {
                     backgroundColor: null,
                     scale: 2,
                     logging: false,
@@ -906,121 +1712,72 @@
 
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
-                const categoryName = getCategoryArabicName(selectedCategory);
-                const userName = nameInput.value.trim().replace(/\s+/g, '_');
-                link.download = `تهنئة_${categoryName}_${userName}.png`;
+                const fileName = `بطاقة_تهنئة_${selectedCategory}_${document.getElementById('recipientName').value}.png`;
+                link.download = fileName;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
 
-                showAlert('✅ تم تحميل البطاقة بنجاح!');
+                alert('✅ تم تحميل البطاقة بنجاح!');
             } catch (error) {
-                console.error('خطأ في التحميل:', error);
-                showAlert('❌ حدث خطأ في التحميل. حاول مرة أخرى.');
+                console.error('خطأ:', error);
+                alert('❌ حدث خطأ في التحميل');
             } finally {
-                downloadBtn.disabled = false;
-                downloadBtn.textContent = originalText;
+                btn.disabled = false;
+                btn.textContent = '📥 تحميل';
             }
         }
 
-        async function shareOnWhatsApp() {
-            if (!nameInput.value.trim()) {
-                showAlert('من فضلك أدخل الاسم أولاً');
-                nameInput.focus();
-                return;
-            }
+        // ============ PRINT CARD ============
+        function printCard() {
+            window.print();
+        }
 
-            shareBtn.disabled = true;
-            const originalText = shareBtn.textContent;
-            shareBtn.textContent = '⏳ جاري التحضير...';
+        // ============ SHARE ON SOCIAL MEDIA ============
+        function shareOn(platform) {
+            const sender = document.getElementById('senderName').value || 'أنت';
+            const recipient = document.getElementById('recipientName').value || 'المتلقي';
+            const message = document.getElementById('customMessage').value || 'الرسالة الشخصية';
+            const categoryData = categoryMessages[selectedCategory];
 
-            try {
-                const categoryData = categoryMessages[selectedCategory];
-                const message = `🎉 ${categoryData.message} 🎉\n\nلـ: ${nameInput.value}\n\n📱 تم إنشاء البطاقة من بوابة التهاني\n✨ Gatewat Al-Tahani`;
+            const text = `🎊 ${categoryData.message}\n\nمن: ${sender}\nإلى: ${recipient}\n\n${message}\n\n📱 من بوابة التهاني`;
 
-                // Try to generate and share image
-                try {
-                    const canvas = await html2canvas(greetingCard, {
-                        backgroundColor: null,
-                        scale: 2,
-                        logging: false,
-                        useCORS: true,
-                        allowTaint: true
+            const encodedText = encodeURIComponent(text);
+
+            switch(platform) {
+                case 'whatsapp':
+                    window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+                    break;
+                case 'facebook':
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=https://gatewat-tahani.com&quote=${encodedText}`, '_blank');
+                    break;
+                case 'twitter':
+                    window.open(`https://twitter.com/intent/tweet?text=${encodedText}`, '_blank');
+                    break;
+                case 'telegram':
+                    window.open(`https://t.me/share/url?url=https://gatewat-tahani.com&text=${encodedText}`, '_blank');
+                    break;
+                case 'email':
+                    window.open(`mailto:?subject=بطاقة تهنئة من بوابة التهاني&body=${encodedText}`);
+                    break;
+                case 'copy':
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('✅ تم نسخ النص بنجاح!');
                     });
-
-                    canvas.toBlob(function(blob) {
-                        if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], 'greeting.png')] })) {
-                            navigator.share({
-                                title: 'تهنئة من بوابة التهاني',
-                                text: message,
-                                files: [new File([blob], 'greeting.png', { type: 'image/png' })]
-                            }).catch(err => {
-                                if (err.name !== 'AbortError') {
-                                    openWhatsAppFallback(message);
-                                }
-                            });
-                        } else {
-                            openWhatsAppFallback(message);
-                        }
-
-                        shareBtn.disabled = false;
-                        shareBtn.textContent = originalText;
-                    }, 'image/png');
-                } catch (canvasError) {
-                    console.error('خطأ في إنشاء الصورة:', canvasError);
-                    openWhatsAppFallback(message);
-                    shareBtn.disabled = false;
-                    shareBtn.textContent = originalText;
-                }
-
-            } catch (error) {
-                console.error('خطأ في المشاركة:', error);
-                showAlert('❌ حدث خطأ في المشاركة. حاول مرة أخرى.');
-                shareBtn.disabled = false;
-                shareBtn.textContent = originalText;
+                    break;
             }
         }
 
-        function openWhatsAppFallback(message) {
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank', 'width=800,height=600');
-        }
-
-        function showAlert(message) {
-            // Using native alert - can be replaced with custom notification
-            alert(message);
-        }
-
-        function getCategoryArabicName(category) {
-            const names = {
-                'eid': 'أعياد',
-                'wedding': 'زواج',
-                'success': 'نجاح',
-                'birth': 'مواليد',
-                'birthday': 'ميلاد',
-                'graduation': 'تخرج'
-            };
-            return names[category] || 'تهنئة';
+        // ============ CREATE FROM TEMPLATE ============
+        function createFromTemplate(type, number) {
+            selectCategory(type === 'eid' ? 'eid' : 'certificate');
+            alert(`✅ تم فتح البطاقة رقم ${number} - يمكنك الآن تخصيصها بأسمائك ورسالتك الخاصة`);
         }
 
         // ============ INITIALIZATION ============
-
-        // Handle window resize for responsive adjustments
-        window.addEventListener('resize', function() {
-            // Adjust card responsiveness if needed
-        });
-
-        // Log initialization
         window.addEventListener('load', function() {
             console.log('✅ بوابة التهاني جاهزة للاستخدام');
-            console.log('🎊 Welcome to Gatewat Al-Tahani');
-            nameInput.focus();
-        });
-
-        // Prevent unnecessary context menu
-        document.addEventListener('contextmenu', function(e) {
-            // Allow right-click for accessibility
+            updateImagePreview();
         });
     </script>
 </body>
