@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة التهاني - Gatewat Al-Tahani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #b8960f;
+            --white: #ffffff;
+            --cream: #f5f1e8;
+            --sugar: #faf8f3;
+            --dark-text: #2c2c2c;
+            --light-gray: #e8e8e8;
+            --gold-transparent: rgba(212, 175, 55, 0.1);
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--sugar);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .header-content {
+            color: var(--white);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* ============ CATEGORIES SECTION ============ */
+        .categories-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(212, 175, 55, 0.1);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--gold-transparent) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .category-card:hover::before {
+            opacity: 1;
+        }
+
+        .category-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: block;
+            animation: bounce 0.6s ease;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .category-card p {
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        /* ============ GREETING SECTION ============ */
+        .greeting-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .back-btn {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background-color: var(--gold);
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .greeting-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .greeting-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        /* ============ INPUT GROUP ============ */
+        .input-group {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            background-color: var(--white);
+            color: var(--dark-text);
+            text-align: center;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            background-color: var(--sugar);
+        }
+
+        .input-group input::placeholder {
+            color: #bbb;
+        }
+
+        /* ============ GREETING CARD ============ */
+        .greeting-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .greeting-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--gold-transparent) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        .greeting-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+        }
+
+        .gold-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 15px 0;
+            border-radius: 2px;
+        }
+
+        .gold-line.small {
+            max-width: 80px;
+            margin: 10px auto;
+        }
+
+        .card-message {
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .card-name {
+            font-size: 2.5rem;
+            color: var(--dark-gold);
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.1);
+            word-break: break-word;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .decorative-elements {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.5rem;
+        }
+
+        .decoration {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .decoration:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .decoration:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .card-footer {
+            margin-top: 20px;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            opacity: 0.6;
+            font-weight: 500;
+        }
+
+        /* ============ ACTION BUTTONS ============ */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            text-transform: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: var(--white);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-download:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-share {
+            background: linear-gradient(135deg, #25d366 0%, #20ba5a 100%);
+            color: var(--white);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-share:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-share:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .help-text {
+            text-align: center;
+            color: var(--dark-text);
+            opacity: 0.6;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 2px solid var(--light-gray);
+            margin-top: 50px;
+            color: var(--dark-text);
+            opacity: 0.7;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .version {
+            font-size: 0.85rem !important;
+            margin-top: 10px !important;
+        }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(50px, 50px) rotate(360deg);
+            }
+        }
+
+        /* ============ MOBILE RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 15px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .category-card {
+                padding: 20px;
+            }
+
+            .card-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .greeting-card {
+                padding: 25px 20px;
+                min-height: 300px;
+            }
+
+            .card-name {
+                font-size: 2rem;
+            }
+
+            .card-message {
+                font-size: 1.1rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 25px 10px;
+                margin-bottom: 25px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .tagline {
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .category-card {
+                padding: 15px;
+            }
+
+            .card-icon {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+
+            .category-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .category-card p {
+                font-size: 0.85rem;
+            }
+
+            .greeting-card {
+                padding: 20px 15px;
+                min-height: 250px;
+                border-width: 2px;
+            }
+
+            .card-name {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+
+            .card-message {
+                font-size: 1rem;
+            }
+
+            .decorative-elements {
+                gap: 12px;
+                font-size: 1.2rem;
+            }
+
+            .gold-line {
+                margin: 10px 0;
+            }
+
+            .greeting-title {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+
+            .input-group input {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+
+            .action-buttons {
+                gap: 10px;
+                margin: 20px 0;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            .help-text {
+                font-size: 0.8rem;
+            }
+
+            .footer {
+                padding: 20px 10px;
+                margin-top: 30px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">🎊 بوابة التهاني</h1>
+                <p class="tagline">نشر الفرح والسعادة</p>
+            </div>
+        </header>
+
+        <!-- Categories Section -->
+        <section class="categories-section" id="categoriesSection">
+            <h2 class="section-title">اختر قسمك المفضل</h2>
+            <div class="categories-grid">
+                <!-- Eid -->
+                <div class="category-card" data-category="eid">
+                    <div class="card-icon">🌙</div>
+                    <h3>الأعياد</h3>
+                    <p>بطاقات تهنئة عيد الفطر والأضحى</p>
+                </div>
+
+                <!-- Wedding -->
+                <div class="category-card" data-category="wedding">
+                    <div class="card-icon">💒</div>
+                    <h3>الزواج</h3>
+                    <p>تهاني بمناسبة الزفاف السعيد</p>
+                </div>
+
+                <!-- Success -->
+                <div class="category-card" data-category="success">
+                    <div class="card-icon">🏆</div>
+                    <h3>النجاح</h3>
+                    <p>تهاني بالإنجاز والنجاح</p>
+                </div>
+
+                <!-- Birth -->
+                <div class="category-card" data-category="birth">
+                    <div class="card-icon">👶</div>
+                    <h3>المواليد</h3>
+                    <p>تهاني بقدوم المولود الجديد</p>
+                </div>
+
+                <!-- Birthday -->
+                <div class="category-card" data-category="birthday">
+                    <div class="card-icon">🎂</div>
+                    <h3>أعياد الميلاد</h3>
+                    <p>تهاني بسنة عمر جديدة</p>
+                </div>
+
+                <!-- Graduation -->
+                <div class="category-card" data-category="graduation">
+                    <div class="card-icon">🎓</div>
+                    <h3>التخرج</h3>
+                    <p>تهاني بإتمام المرحلة الدراسية</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Greeting Card Section -->
+        <section class="greeting-section" id="greetingSection" style="display: none;">
+            <button class="back-btn" id="backBtn">← العودة</button>
+
+            <div class="greeting-container">
+                <h2 class="greeting-title">إنشاء بطاقة التهنئة</h2>
+
+                <!-- Input Name -->
+                <div class="input-group">
+                    <label for="nameInput">أدخل الاسم:</label>
+                    <input 
+                        type="text" 
+                        id="nameInput" 
+                        placeholder="اكتب الاسم هنا..."
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <!-- Greeting Card Preview -->
+                <div id="greetingCard" class="greeting-card">
+                    <div class="card-header">
+                        <div class="gold-line"></div>
+                        <p id="cardMessage" class="card-message">🌙 كل عام وأنت بألف خير</p>
+                        <div class="gold-line"></div>
+                    </div>
+
+                    <div class="card-body">
+                        <h2 id="cardName" class="card-name">اسمك</h2>
+                        <div class="decorative-elements">
+                            <span class="decoration">✨</span>
+                            <span class="decoration">💫</span>
+                            <span class="decoration">✨</span>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <p class="footer-text">من بوابة التهاني</p>
+                        <div class="gold-line small"></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-download" id="downloadBtn">
+                        📥 تحميل البطاقة
+                    </button>
+                    <button class="btn btn-share" id="shareBtn">
+                        📱 مشاركة على واتساب
+                    </button>
+                </div>
+
+                <p class="help-text">💡 ��كتب الاسم لتراه مباشرة على البطاقة</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 بوابة التهاني | جميع الحقوق محفوظة</p>
+            <p class="version">Made with ❤️</p>
+        </footer>
+    </div>
+
+    <!-- HTML2Canvas Library for Image Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        // Category Messages & Configuration
+        const categoryMessages = {
+            eid: {
+                message: 'كل عام وأنت بألف خير',
+                icon: '🌙'
+            },
+            wedding: {
+                message: 'ألف مبروك العقد السعيد',
+                icon: '💒'
+            },
+            success: {
+                message: 'مبروك تحقيق حلمك',
+                icon: '🏆'
+            },
+            birth: {
+                message: 'مبروك المولود الجديد',
+                icon: '👶'
+            },
+            birthday: {
+                message: 'كل عام وأنت أقرب لأحلامك',
+                icon: '🎂'
+            },
+            graduation: {
+                message: 'مبروك نهاية المرحلة بتفوق',
+                icon: '🎓'
+            }
+        };
+
+        let selectedCategory = null;
+
+        // DOM Elements
+        const categoryCards = document.querySelectorAll('.category-card');
+        const greetingSection = document.getElementById('greetingSection');
+        const categoriesSection = document.getElementById('categoriesSection');
+        const backBtn = document.getElementById('backBtn');
+        const nameInput = document.getElementById('nameInput');
+        const cardMessage = document.getElementById('cardMessage');
+        const cardName = document.getElementById('cardName');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const greetingCard = document.getElementById('greetingCard');
+
+        // ============ EVENT LISTENERS ============
+
+        // Category Selection
+        categoryCards.forEach(card => {
+            card.addEventListener('click', function() {
+                selectedCategory = this.getAttribute('data-category');
+                showGreetingCard();
+            });
+
+            card.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    selectedCategory = this.getAttribute('data-category');
+                    showGreetingCard();
+                }
+            });
+        });
+
+        // Back Button
+        backBtn.addEventListener('click', goBackToCategories);
+
+        // Real-time Name Update
+        nameInput.addEventListener('input', updateCardName);
+        nameInput.addEventListener('keypress', handleNameInputKeyPress);
+
+        // Download Button
+        downloadBtn.addEventListener('click', downloadCard);
+
+        // Share Button
+        shareBtn.addEventListener('click', shareOnWhatsApp);
+
+        // ============ FUNCTIONS ============
+
+        function showGreetingCard() {
+            categoriesSection.style.display = 'none';
+            greetingSection.style.display = 'block';
+            
+            const categoryData = categoryMessages[selectedCategory];
+            cardMessage.textContent = categoryData.icon + ' ' + categoryData.message;
+            cardName.textContent = 'اسمك';
+            nameInput.value = '';
+            nameInput.focus();
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBackToCategories() {
+            greetingSection.style.display = 'none';
+            categoriesSection.style.display = 'block';
+            selectedCategory = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateCardName() {
+            const name = nameInput.value.trim();
+            cardName.textContent = name || 'اسمك';
+        }
+
+        function handleNameInputKeyPress(e) {
+            if (e.key === 'Enter') {
+                if (nameInput.value.trim()) {
+                    downloadBtn.click();
+                }
+            }
+        }
+
+        async function downloadCard() {
+            if (!nameInput.value.trim()) {
+                showAlert('من فضلك أدخل الاسم أولاً');
+                nameInput.focus();
+                return;
+            }
+
+            downloadBtn.disabled = true;
+            const originalText = downloadBtn.textContent;
+            downloadBtn.textContent = '⏳ جاري التحميل...';
+
+            try {
+                const canvas = await html2canvas(greetingCard, {
+                    backgroundColor: null,
+                    scale: 2,
+                    logging: false,
+                    useCORS: true,
+                    allowTaint: true
+                });
+
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                const categoryName = getCategoryArabicName(selectedCategory);
+                const userName = nameInput.value.trim().replace(/\s+/g, '_');
+                link.download = `تهنئة_${categoryName}_${userName}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                showAlert('✅ تم تحميل البطاقة بنجاح!');
+            } catch (error) {
+                console.error('خطأ في التحميل:', error);
+                showAlert('❌ حدث خطأ في التحميل. حاول مرة أخرى.');
+            } finally {
+                downloadBtn.disabled = false;
+                downloadBtn.textContent = originalText;
+            }
+        }
+
+        async function shareOnWhatsApp() {
+            if (!nameInput.value.trim()) {
+                showAlert('من فضلك أدخل الاسم أولاً');
+                nameInput.focus();
+                return;
+            }
+
+            shareBtn.disabled = true;
+            const originalText = shareBtn.textContent;
+            shareBtn.textContent = '⏳ جاري التحضير...';
+
+            try {
+                const categoryData = categoryMessages[selectedCategory];
+                const message = `🎉 ${categoryData.message} 🎉\n\nلـ: ${nameInput.value}\n\n📱 تم إنشاء البطاقة من بوابة التهاني\n✨ Gatewat Al-Tahani`;
+
+                // Try to generate and share image
+                try {
+                    const canvas = await html2canvas(greetingCard, {
+                        backgroundColor: null,
+                        scale: 2,
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true
+                    });
+
+                    canvas.toBlob(function(blob) {
+                        if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], 'greeting.png')] })) {
+                            navigator.share({
+                                title: 'تهنئة من بوابة التهاني',
+                                text: message,
+                                files: [new File([blob], 'greeting.png', { type: 'image/png' })]
+                            }).catch(err => {
+                                if (err.name !== 'AbortError') {
+                                    openWhatsAppFallback(message);
+                                }
+                            });
+                        } else {
+                            openWhatsAppFallback(message);
+                        }
+
+                        shareBtn.disabled = false;
+                        shareBtn.textContent = originalText;
+                    }, 'image/png');
+                } catch (canvasError) {
+                    console.error('خطأ في إنشاء الصورة:', canvasError);
+                    openWhatsAppFallback(message);
+                    shareBtn.disabled = false;
+                    shareBtn.textContent = originalText;
+                }
+
+            } catch (error) {
+                console.error('خطأ في المشاركة:', error);
+                showAlert('❌ حدث خطأ في المشاركة. حاول مرة أخرى.');
+                shareBtn.disabled = false;
+                shareBtn.textContent = originalText;
+            }
+        }
+
+        function openWhatsAppFallback(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank', 'width=800,height=600');
+        }
+
+        function showAlert(message) {
+            // Using native alert - can be replaced with custom notification
+            alert(message);
+        }
+
+        function getCategoryArabicName(category) {
+            const names = {
+                'eid': 'أعياد',
+                'wedding': 'زواج',
+                'success': 'نجاح',
+                'birth': 'مواليد',
+                'birthday': 'ميلاد',
+                'graduation': 'تخرج'
+            };
+            return names[category] || 'تهنئة';
+        }
+
+        // ============ INITIALIZATION ============
+
+        // Handle window resize for responsive adjustments
+        window.addEventListener('resize', function() {
+            // Adjust card responsiveness if needed
+        });
+
+        // Log initialization
+        window.addEventListener('load', function() {
+            console.log('✅ بوابة التهاني جاهزة للاستخدام');
+            console.log('🎊 Welcome to Gatewat Al-Tahani');
+            nameInput.focus();
+        });
+
+        // Prevent unnecessary context menu
+        document.addEventListener('contextmenu', function(e) {
+            // Allow right-click for accessibility
+        });
+    </script>
+</body>
+</html>
